@@ -1,0 +1,3 @@
+# PLATFORM="CASIO"
+PLATFORM="PC" # PC
+
