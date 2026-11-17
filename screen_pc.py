@@ -49,7 +49,16 @@ class Screen(DrawingMixin):
         self.is_open = False
 
       screen = pygame.display.get_surface()
-      pygame.transform.scale(self.buf, screen.get_size(), screen)
+      scale_w = screen.get_width() / self.buf.get_width()
+      scale_h = screen.get_height() / self.buf.get_height()
+      scale = min(scale_w, scale_h)
+
+      scaled_buf = pygame.transform.scale(self.buf, (self.buf.get_width()*scale, self.buf.get_height()*scale))
+
+      screen_center = (screen.get_width()//2,screen.get_height()//2)
+      buf_center = (scaled_buf.get_width()//2,scaled_buf.get_height()//2)
+
+      screen.blit(scaled_buf, (screen_center[0]-buf_center[0],screen_center[1]-buf_center[1]))
       pygame.display.flip()
 
 
