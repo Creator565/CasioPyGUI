@@ -16,11 +16,11 @@ class Screen(DrawingMixin):
 
     self.is_open=True
 
-    self.buf = pygame.Surface((w,h))
-    self.buf.fill(VWHITE)
+    self._buf = pygame.Surface((w,h))
+    self._buf.fill(VWHITE)
 
   def get_pixel(self, x, y):
-    px = self.buf.get_at((x,y))
+    px = self._buf.get_at((round(x),round(y)))
     if px[0]==VBLACK[0]:
       return CBLACK
     else:
@@ -28,21 +28,21 @@ class Screen(DrawingMixin):
 
   def set_pixel(self, x, y, color=CBLACK):
     if color==CBLACK:
-      self.buf.set_at((x,y), VBLACK)
+      self._buf.set_at((round(x),round(y)), VBLACK)
     elif color==CWHITE:
-      self.buf.set_at((x,y), VWHITE)
+      self._buf.set_at((round(x),round(y)), VWHITE)
     elif color==CINVERT:
       if self.get_pixel(x,y)==CBLACK:
-        self.buf.set_at((x,y), VWHITE)
+        self._buf.set_at((round(x),round(y)), VWHITE)
       else:
-        self.buf.set_at((x,y), VBLACK)
+        self._buf.set_at((round(x),round(y)), VBLACK)
 
 
   def clear_screen(self, color=CWHITE):
     if color==CWHITE:
-      self.buf.fill(VWHITE)
+      self._buf.fill(VWHITE)
     elif color==CBLACK:
-      self.buf.fill(VBLACK)
+      self._buf.fill(VBLACK)
     elif color==CINVERT:
       for x in range(self.w):
         for y in range(self.h):
@@ -55,11 +55,11 @@ class Screen(DrawingMixin):
         self.is_open = False
 
       screen = pygame.display.get_surface()
-      scale_w = screen.get_width() / self.buf.get_width()
-      scale_h = screen.get_height() / self.buf.get_height()
+      scale_w = screen.get_width() / self._buf.get_width()
+      scale_h = screen.get_height() / self._buf.get_height()
       scale = min(scale_w, scale_h)
 
-      scaled_buf = pygame.transform.scale(self.buf, (self.buf.get_width()*scale, self.buf.get_height()*scale))
+      scaled_buf = pygame.transform.scale(self._buf, (self._buf.get_width()*scale, self._buf.get_height()*scale))
 
       screen_center = (screen.get_width()//2,screen.get_height()//2)
       buf_center = (scaled_buf.get_width()//2,scaled_buf.get_height()//2)
