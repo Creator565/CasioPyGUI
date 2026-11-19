@@ -24,6 +24,4 @@ class Vec2:
     return "(x:"+str(self.x)+",y:"+str(self.y)+")"
 
 
-class Point(Vec2):
-  pass
-
+Point = Vec2

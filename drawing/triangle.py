@@ -1,5 +1,8 @@
 # pyright: basic
 
+from .util import overload_points
+
+
 def _draw_scanline(self, x_start, x_end, y):
   if x_start > x_end:
     x_start, x_end = x_end, x_start
@@ -70,8 +73,8 @@ class TriangleMixin:
   _draw_scanline = _draw_scanline
   _fill_flat_bottom = _fill_flat_bottom
   _fill_flat_top = _fill_flat_top
-  htriangle = htriangle
+  htriangle = overload_points(htriangle)
   htri = htriangle
-  triangle = triangle
+  triangle = overload_points(triangle)
   tri = triangle
 

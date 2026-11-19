@@ -1,5 +1,8 @@
 # pyright: basic
 
+from .util import overload_points
+
+
 def vline(self,x,y1,y2):
   if x<0 or x>self.w-1:
     return
@@ -53,5 +56,5 @@ def line(self,x1,y1,x2,y2):
 class LineMixin:
     vline = vline
     hline = hline
-    line = line
+    line = overload_points(line)
 

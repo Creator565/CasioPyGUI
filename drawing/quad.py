@@ -1,5 +1,8 @@
 # pyright: basic
 
+from .util import overload_points
+
+
 def quad(self,x1,y1,x2,y2,x3,y3,x4,y4):
   d_13_in=max(x1,x3)<max(x2,x4)
   d_13_in=d_13_in and (max(y1,y3)<max(y2,y4))
@@ -17,6 +20,6 @@ def hquad(self,x1,y1,x2,y2,x3,y3,x4,y4):
   self.line(x4,y4,x1,y1)
 
 class QuadMixin:
-  quad = quad
-  hquad = hquad
+  quad = overload_points(quad)
+  hquad = overload_points(hquad)
 

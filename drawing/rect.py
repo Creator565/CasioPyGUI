@@ -1,5 +1,8 @@
 # pyright: basic
 
+from .util import overload_points
+
+
 def rect(self,x1,y1,x2,y2):
   if min(x1, x2)>self.w-1 or max(x1,x2)<0:
         return
@@ -28,6 +31,6 @@ def hrect(self,x1,y1,x2,y2):
   self.line(xmax,ymin,xmax,ymax)
 
 class RectMixin:
-  rect = rect
-  hrect = hrect
+  rect = overload_points(rect)
+  hrect = overload_points(hrect)
 
