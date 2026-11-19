@@ -1,10 +1,16 @@
 # pyright: basic
 import pygame
+
 from .colors import *
 from .drawing import DrawingMixin
 
+
 class Screen(DrawingMixin):
   def __init__(self, w=128, h=64):
+    if not pygame.get_init():
+      pygame.init()
+      pygame.display.set_mode((w,h), pygame.RESIZABLE)
+
     self.w = w
     self.h = h
 
